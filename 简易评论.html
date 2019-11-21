@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      li {
+        width: 300px;
+      }
+      a {
+        float: right;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input type="text" />
+    <input type="button" value="发表" />
+    <ul></ul>
+  </body>
+  <script src="../JQuery-3.4.1.js"></script>
+  <script>
+    function toggleLi() {
+      if (text.val() == "") {
+        return false;
+      }
+      var li = $("<li></li>");
+      li.html(text.val() + "<a href='javascript:;'>删除</a>");
+      $("ul").prepend(li);
+      arr.push(text.val());
+      arr = JSON.stringify(arr);
+      localStorage.setItem("list", arr);
+      arr = JSON.parse(arr);
+      text.val("");
+      //   removeLi();
+    }
+
+    function removeLi() {
+      //   $("a").on("click", function() {
+      $("ul").on("click", "a", function() {
+        // console.log($("a").index(this));
+        var i = $("a").index(this);
+        $(this)
+          .parent()
+          .remove();
+        // arr = JSON.parse(localStorage.getItem("list"));
+        arr.splice(i, 1);
+        arr = JSON.stringify(arr);
+        localStorage.setItem("list", arr);
+        arr = JSON.parse(arr);
+      });
+    }
+    //function分隔线
+
+    //function分隔线
+
+    var text = $("input:text");
+    var btn = $("input:button");
+    var data = localStorage.getItem("list");
+    var arr = JSON.parse(data) || [];
+    //打印数据
+    arr.forEach((e, i) => {
+      var li = $("<li>" + e + "<a href='javascript:;'>删除</a></li>");
+      $("ul").prepend(li);
+      //   removeLi();
+    });
+    //增加数据
+    btn.on("click", function() {
+      toggleLi();
+    });
+    //回车输出
+    document.addEventListener("keydown", function(e) {
+      if (e.keyCode == 13) {
+        toggleLi();
+      }
+    });
+    removeLi();
+  </script>
+</html>
