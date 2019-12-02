@@ -1,5 +1,6 @@
 // ——————————时间类—————————— \\
-//-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\//-\\ //-\\
+
+//-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\  //-\\   //-\\
 //_————格式化时间
 function formatTime() {
   var date = new Date();
@@ -49,6 +50,7 @@ function countDown(time) {
 }
 
 // ——————————BON类—————————— \\
+
 //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\
 //_————获取地址栏传递data,返回对象data
 function locationData() {
@@ -64,6 +66,7 @@ function locationData() {
 }
 
 //_——————————ajax——————————_\\
+
 //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\
 // _get和post
 function ajax(type, url, obj, callback) {
@@ -83,7 +86,7 @@ function ajax(type, url, obj, callback) {
   } else {
     xhr.send();
   }
-  // _状态
+  // _判断请求成功，后执行函数
   ajax.xhr.onreadystatechange = function() {
     if (ajax.xhr.readyState === 4 && ajax.xhr.status === 200) {
       callback(xhr.responseText); //responseText响应信息字符串
