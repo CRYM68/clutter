@@ -1,4 +1,4 @@
-//——————————时间类——————————\\
+// ——————————时间类—————————— \\
 //-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\//-\\ //-\\
 //_————格式化时间
 function formatTime() {
@@ -48,8 +48,8 @@ function countDown(time) {
   return formatTimeMS(t - now);
 }
 
-//_——————————BON类——————————\\
-//-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\ //-\\//-\\ //-\\
+// ——————————BON类—————————— \\
+//-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\
 //_————获取地址栏传递data,返回对象data
 function locationData() {
   var data = {};
@@ -61,4 +61,32 @@ function locationData() {
       data[arr[0]] = arr[1];
     });
   return data;
+}
+
+//_——————————ajax——————————_\\
+//-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\
+// _get和post
+function ajax(type, url, obj, callback) {
+  let xhr = new XMLHttpRequest();
+  let data;
+  for (let k in obj) {
+    data = k + "=" + data[k] + "&";
+  }
+  // _判断！get传参方式
+  if (type.toLowerCase() === "get") {
+    url = "?" + data;
+  }
+  xhr.open(type, url);
+  // _判断！post传参方式
+  if (type.toLowerCase() === "post") {
+    xhr.send(data);
+  } else {
+    xhr.send();
+  }
+  // _状态
+  ajax.xhr.onreadystatechange = function() {
+    if (ajax.xhr.readyState === 4 && ajax.xhr.status === 200) {
+      callback(xhr.responseText); //responseText响应信息字符串
+    }
+  };
 }
