@@ -74,8 +74,8 @@ function locationData() {
  * @example {
  *  url:请求的地址,
  *  type:请求方式,
- *
- *
+ *  obj：数据，
+ * callback：回调函数，
  * }
  */
 function ajax(Object) {
@@ -96,7 +96,7 @@ function ajax(Object) {
   xhr.open(type, url);
   // _判断！post传参方式
   if (type.toLowerCase() === "post") {
-    xhr.setRequestHeader("Content-Type", "application/x=wwww-form-urlencoded");
+    xhr.setRequestHeader("Content-Type", "application/x-wwww-form-urlencoded");
     xhr.send(data);
   } else {
     xhr.send();
