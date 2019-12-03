@@ -69,7 +69,21 @@ function locationData() {
 
 //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\
 // _get和post
-function ajax(type, url, obj, callback) {
+/**
+ * @param {Object} Object
+ * @example {
+ *  url:请求的地址,
+ *  type:请求方式,
+ *
+ *
+ * }
+ */
+function ajax(Object) {
+  let url = Object.url || "";
+  let type = Object.type || "get";
+  let obj = Object.obj || {};
+  let callback = Object.callback;
+  // _创建对象
   let xhr = new XMLHttpRequest();
   let data;
   for (let k in obj) {
@@ -82,6 +96,7 @@ function ajax(type, url, obj, callback) {
   xhr.open(type, url);
   // _判断！post传参方式
   if (type.toLowerCase() === "post") {
+    xhr.setRequestHeader("Content-Type", "application/x=wwww-form-urlencoded");
     xhr.send(data);
   } else {
     xhr.send();
