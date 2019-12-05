@@ -75,36 +75,35 @@ function locationData() {
  *  url:请求的地址,
  *  type:请求方式,
  *  obj：数据，
- * callback：回调函数，
+ * cussess：回调函数，
  * }
  */
 function ajax(Object) {
   let url = Object.url || "";
   let type = Object.type || "get";
-  let obj = Object.obj || {};
-  let callback = Object.callback;
+  let data = Object.data || {};
+  let success = Object.success || null;
   // _创建对象
   let xhr = new XMLHttpRequest();
-  let data;
-  for (let k in obj) {
-    data = k + "=" + data[k] + "&";
+  let dataItem = "";
+  for (let k in data) {
+    if (dataItem !== "") dataItem += "&";
+    dataItem += k + "=" + data[k];
   }
+  console.log(dataItem);
+
   // _判断！get传参方式
-  if (type.toLowerCase() === "get") {
-    url = "?" + data;
-  }
+  if (type.toLowerCase() === "get") url = "?" + dataItem;
   xhr.open(type, url);
+
   // _判断！post传参方式
   if (type.toLowerCase() === "post") {
-    xhr.setRequestHeader("Content-Type", "application/x-wwww-form-urlencoded");
-    xhr.send(data);
-  } else {
-    xhr.send();
-  }
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(dataItem);
+  } else xhr.send();
   // _判断请求成功，后执行函数
-  ajax.xhr.onreadystatechange = function() {
-    if (ajax.xhr.readyState === 4 && ajax.xhr.status === 200) {
-      callback(xhr.responseText); //responseText响应信息字符串
-    }
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200)
+      success(JSON.parse(xhr.responseText)); //responseText响应信息字符串
   };
 }
