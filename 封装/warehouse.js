@@ -33,13 +33,15 @@ function formatTime() {
   return `${year}年${month}月${day}日  ${hour}:${minutes}:${second} ${weekDay}`;
 }
 
-//_————毫秒数转化为时间格式
+//_————毫秒数转化为时间格式,
 function formatTimeMS(MS) {
-  var days = Math.floor(MS / 1000 / 60 / 60 / 24);
-  var hours = Math.floor((MS / 1000 / 60 / 60) % 24);
-  var minutes = Math.floor((MS / 1000 / 60) % 60);
-  var seconds = Math.floor((MS / 1000) % 60);
-  return `${days}天${hours}时${minutes}分${seconds}秒`;
+  MS = MS / 1000 - 8 * 60 * 60; //毫秒数重置为00：00：00开始
+  var years = Math.floor(MS / 60 / 60 / 24 / 365);
+  var days = Math.floor((MS / 60 / 60 / 24) % 365);
+  var hours = Math.floor((MS / 60 / 60) % 24);
+  var minutes = Math.floor((MS / 60) % 60);
+  var seconds = Math.floor(MS % 60);
+  return `${years}年${days}天${hours}时${minutes}分${seconds}秒`;
 }
 
 //_————输入日期进行倒计时
@@ -47,6 +49,12 @@ function countDown(time) {
   var now = +new Date();
   var t = Date.parse(time);
   return formatTimeMS(t - now);
+}
+
+// ——————————DOM类—————————— \\
+//-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\   //-\\
+function qs(select) {
+  return document.querySelector(select);
 }
 
 // ——————————BON类—————————— \\
@@ -90,7 +98,6 @@ function ajax(Object) {
     if (dataItem !== "") dataItem += "&";
     dataItem += k + "=" + data[k];
   }
-  console.log(dataItem);
 
   // _判断！get传参方式
   if (type.toLowerCase() === "get") url = "?" + dataItem;
