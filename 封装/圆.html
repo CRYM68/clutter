@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    @keyframes run {
+        0% {
+            transform: rotateX(0deg);
+        }
+
+        100% {
+            transform: rotateX(360deg);
+        }
+    }
+
+    @keyframes unrun {
+        0% {
+            transition: rotate(360deg);
+        }
+
+        100% {
+            transition: rotate(0deg);
+        }
+    }
+
+    .f {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        border: 1px solid #000;
+        transform: rotateY(60deg);
+        transform-style: preserve-3d;
+        perspective: 50;
+    }
+
+    .c {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border: 1px solid #000;
+        border-radius: 50%;
+        /* -webkit-transiform-style: preserve-3d; */
+    }
+
+    .one {
+        background: blue;
+        /* transform: rotateX(45deg); */
+        animation: run 10s infinite;
+    }
+
+    .two {
+        background: red;
+        /* transform: rotateX(135deg); */
+        animation: unrun 10s infinite;
+    }
+</style>
+
+<body>
+    <div class="f">
+        <div class="c one"></div>
+        <div class="c two"></div>
+    </div>
+</body>
+
+</html>

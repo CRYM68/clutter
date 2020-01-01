@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            margin: 5px;
+        }
+
+        div {
+            width: 200px;
+            height: 50px;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 50px;
+
+        }
+
+        input {
+            border: 1px solid #000;
+            padding: 5px;
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>新年倒计时</h3>
+    <div></div>
+    <input type="text" placeholder="时间">
+    <br>
+    <input type="button" value="显示">
+</body>
+<script src="./warehouse.js"></script>
+<script>
+
+    // _元素获取
+    var input = qs('input[type=text]');
+    var div = qs('div');
+
+    // _时间获取
+    var years, days, hours, minutes, sconds, stop = false;//stop在另一边
+    var time = input.value;
+    if (time === '') time = '2020-1-18';
+    var id = setInterval(fn, 1000); // - 每秒执行一次
+
+    //_注册失焦 按键事件
+    //  _失焦
+    input.addEventListener('blur', function () {
+        if (input.value.trim() !== '') {
+            time = input.value;
+            console.log(input.value);
+            if (stop) id = setInterval(fn, 1000);
+        }
+    });
+    // _回车
+    input.addEventListener('keydown', function (e) {
+        if (e.keyCode === 13 && input.value.trim() !== '') {
+            time = input.value;
+            if (stop) id = setInterval(fn, 1000);
+        }
+    });
+
+
+</script>
+
+</html>
